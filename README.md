@@ -46,6 +46,10 @@ content-type: application/json
 {"id":1,"title":"Buy groceries","done":false}
 ```
 
-## Swagger screenshot
+## Swagger UI
 
-See the interactive API docs at http://127.0.0.1:8000/docs and the screenshot in the docs folder.
+Open http://127.0.0.1:8000/docs to test the full CRUD flow directly in the browser. The documentation is generated automatically from the FastAPI routes.
+
+## Git history
+
+The repository is organized in staged commits for the assignment flow: hello server, root and health endpoints, read endpoints with 404 handling, create with validation, full CRUD, and Swagger documentation.
