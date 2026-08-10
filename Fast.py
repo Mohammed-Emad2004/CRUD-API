@@ -88,14 +88,15 @@ async def gettask(id:int):
 )
 async def posttask(task:Task):
     if   task.title.strip():
-        tasks.append(
-        {
-            "id":tasks[-1]["id"] + 1,
-            "title": task.title,
-            "done": False
-        }
-        )
-        return tasks[-1]
+        conn = sqlite3.connect("tasks.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO tasks (title, done) VALUES (?, ?)", (task.title.strip(), False))
+        conn.commit()
+        new_id = cursor.lastrowid
+        cursor.execute("SELECT id, title, done FROM tasks WHERE id = ?", (new_id,))
+        row = cursor.fetchone()
+        conn.close()
+        return {"id": row[0], "title": row[1], "done": row[2]}
     raise HTTPException (status_code=400, detail="Title cannot be empty"  )
 class UpdateTask(BaseModel):
     title:str|None=None
