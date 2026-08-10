@@ -62,12 +62,22 @@ tasks = [
     description="Returns a list of all tasks."
 )
 async def gettasks():
-    return tasks
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tasks")
+    rows = cursor.fetchall()
+    conn.close()
+    return [{"id": row[0], "title": row[1], "done": row[2]} for row in rows]
+
 @app.get('/tasks/{id}')
 async def gettask(id:int):
-    for task in tasks:
-        if task['id']==id:
-            return task
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
+    row = cursor.fetchone()
+    conn.close()
+    if row:
+        return {"id": row[0], "title": row[1], "done": row[2]}
     raise HTTPException (status_code=404, detail=f"Task {id} not found" )
 
 @app.post(
