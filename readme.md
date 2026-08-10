@@ -15,12 +15,39 @@ A simple CRUD REST API built with **FastAPI** that demonstrates the basic CRUD (
 
 ---
 
+## Why SQLite
+
+SQLite was chosen for this project because:
+
+- It is **lightweight** and requires no configuration.
+- It does **not require a separate database server** to run.
+- The entire database is stored in a **single local file** (`tasks.db`).
+- It is well-suited for small learning projects like this one.
+
+---
+
+## Database
+
+The application uses an SQLite database file called `tasks.db`, stored in the project root directory.
+
+The database and the `tasks` table are **created automatically** when the application starts, if they do not already exist. The table schema is:
+
+| Column | Type |
+|--------|------|
+| `id` | INTEGER PRIMARY KEY |
+| `title` | TEXT |
+| `done` | BOOLEAN |
+
+Three sample tasks are inserted automatically when the database is first created.
+
+---
+
 ## Installation
 
 Install the required packages:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirment.txt
 ```
 
 ---
@@ -30,8 +57,10 @@ pip install -r requirements.txt
 Start the FastAPI server:
 
 ```bash
-uvicorn main:app --reload
+uvicorn Fast:app --reload
 ```
+
+The database will be created automatically on the first run.
 
 Open Swagger UI in your browser:
 
@@ -85,6 +114,40 @@ content-type: application/json
   }
 ]
 ```
+
+---
+
+## SQLite Database Viewer
+
+The SQLite database was inspected using DB Browser for SQLite.
+
+![SQLite Database Viewer](images/stage4-database.png)
+
+---
+
+## Example SQL Query
+
+The following query was executed during Stage 4 using DB Browser for SQLite:
+
+```sql
+SELECT * FROM tasks WHERE done = 1;
+```
+
+This query returns only the completed tasks (where `done` is `1` / `true`).
+
+---
+
+## Stage 4 Verification
+
+During Stage 4, the database was manually modified using DB Browser for SQLite.
+
+For example, after running the following SQL statement:
+
+```sql
+UPDATE tasks SET done = 1;
+```
+
+the `GET /tasks` endpoint was called and confirmed that all tasks now had `done: true`. This verified that the API reads directly from the SQLite database.
 
 ---
 
