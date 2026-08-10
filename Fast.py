@@ -1,11 +1,17 @@
 import sqlite3
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi import HTTPException
 from pydantic import BaseModel
 app=FastAPI()
 
+DB_PATH = Path(__file__).resolve().parent / "tasks.db"
+
+def get_db_connection():
+    return sqlite3.connect(DB_PATH)
+
 def init_db():
-    conn = sqlite3.connect("tasks.db")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tasks (
@@ -39,30 +45,13 @@ class Task(BaseModel):
 async def health():
     return { "status": "ok" }
 
-tasks = [
-    {
-        "id": 1,
-        "title": "Study FastAPI",
-        "done": False
-    },
-    {
-        "id": 2,
-        "title": "Read book",
-        "done": True
-    },
-    {
-        "id": 3,
-        "title": "Go to gym",
-        "done": False
-    }
-]
 @app.get(
     "/tasks",
     summary="Get all tasks",
     description="Returns a list of all tasks."
 )
 async def gettasks():
-    conn = sqlite3.connect("tasks.db")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tasks")
     rows = cursor.fetchall()
@@ -71,7 +60,7 @@ async def gettasks():
 
 @app.get('/tasks/{id}')
 async def gettask(id:int):
-    conn = sqlite3.connect("tasks.db")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
     row = cursor.fetchone()
@@ -88,7 +77,7 @@ async def gettask(id:int):
 )
 async def posttask(task:Task):
     if   task.title.strip():
-        conn = sqlite3.connect("tasks.db")
+        conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute("INSERT INTO tasks (title, done) VALUES (?, ?)", (task.title.strip(), False))
         conn.commit()
@@ -108,7 +97,7 @@ class UpdateTask(BaseModel):
     description="Updates an existing task."
 )
 async def puttask(id:int,Update:UpdateTask):
-    conn = sqlite3.connect("tasks.db")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
     row = cursor.fetchone()
@@ -123,9 +112,6 @@ async def puttask(id:int,Update:UpdateTask):
     conn.commit()
     conn.close()
     return {"id": id, "title": new_title, "done": new_done}
-    
-        
-
 
 @app.delete(
     "/tasks/{id}",
@@ -134,7 +120,7 @@ async def puttask(id:int,Update:UpdateTask):
     status_code=204
 )
 async def deletetask(id:int):
-    conn = sqlite3.connect("tasks.db")
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
     row = cursor.fetchone()
@@ -145,4 +131,3 @@ async def deletetask(id:int):
     conn.commit()
     conn.close()
     return
-    
