@@ -108,15 +108,21 @@ class UpdateTask(BaseModel):
     description="Updates an existing task."
 )
 async def puttask(id:int,Update:UpdateTask):
-    for task in tasks:
-            if task['id']==id:
-                if Update.title is not None and Update.title.strip():
-                  task['title']=Update.title
-                if Update.done is not None:
-                  task['done']=Update.done
-                return task
-
-    raise HTTPException (status_code=404, detail=f"Task {id} not found" )
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        raise HTTPException (status_code=404, detail=f"Task {id} not found" )
+    current_title = row[1]
+    current_done = row[2]
+    new_title = Update.title if (Update.title is not None and Update.title.strip()) else current_title
+    new_done = Update.done if Update.done is not None else current_done
+    cursor.execute("UPDATE tasks SET title = ?, done = ? WHERE id = ?", (new_title, new_done, id))
+    conn.commit()
+    conn.close()
+    return {"id": id, "title": new_title, "done": new_done}
     
         
 
@@ -128,9 +134,15 @@ async def puttask(id:int,Update:UpdateTask):
     status_code=204
 )
 async def deletetask(id:int):
-        for task in tasks:
-            if task['id']==id:
-                tasks.remove(task)
-                return 
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
         raise HTTPException (status_code=404, detail="Unknown id "  )
+    cursor.execute("DELETE FROM tasks WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return
     
