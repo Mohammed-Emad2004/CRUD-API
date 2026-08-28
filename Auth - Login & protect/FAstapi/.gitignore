@@ -1,0 +1,5 @@
+.env
+tasks.db
+__pycache__/
+*.pyc
+sql/reset_pw.sql
