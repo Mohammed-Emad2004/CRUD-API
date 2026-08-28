@@ -1,0 +1,145 @@
+{
+  "total_cases": 8,
+  "passed_cases": 0,
+  "failed_cases": 8,
+  "overall_pass_rate": 0.0,
+  "category_accuracy": 0.75,
+  "quality_accuracy": 0.0,
+  "results": [
+    {
+      "case_id": "case_1_fiction",
+      "passed": false,
+      "expected": {
+        "category": "fiction",
+        "summary": "A classic novel exploring wealth, love, and the American Dream.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "romance",
+        "summary": "A story of fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      }
+    },
+    {
+      "case_id": "case_2_nonfiction",
+      "passed": false,
+      "expected": {
+        "category": "nonfiction",
+        "summary": "An exploration of the history and evolution of humankind.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "nonfiction",
+        "summary": "A narrative history of humanity's creation and evolution.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      }
+    },
+    {
+      "case_id": "case_3_poetry",
+      "passed": false,
+      "expected": {
+        "category": "poetry",
+        "summary": "A collection of lyrical poems exploring nature, love, and loss.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "poetry",
+        "summary": "A timeless collection of lyrical poetry exploring nature, love, and loss.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      }
+    },
+    {
+      "case_id": "case_4_children",
+      "passed": false,
+      "expected": {
+        "category": "children",
+        "summary": "A children's picture book about a boy visiting a land of monsters.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "children",
+        "summary": "A beloved children\u2019s picture book about a mischievous boy who sails to an island of monsters.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      }
+    },
+    {
+      "case_id": "case_5_mystery",
+      "passed": false,
+      "expected": {
+        "category": "mystery",
+        "summary": "Sherlock Holmes investigates a mysterious legend on the moors.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "mystery",
+        "summary": "Sherlock Holmes investigates the legend of a supernatural hound on the Devon moors.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      }
+    },
+    {
+      "case_id": "case_6_other_ambiguous",
+      "passed": false,
+      "expected": {
+        "category": "other",
+        "summary": "A compilation of annual meeting notes and administrative updates.",
+        "quality_flags": []
+      },
+      "actual": {
+        "category": "other",
+        "summary": "Compilation of annual meeting notes and administrative updates.",
+        "quality_flags": [
+          "missing_description"
+        ]
+      }
+    },
+    {
+      "case_id": "case_7_quality_issues",
+      "passed": false,
+      "expected": {
+        "category": "nonfiction",
+        "summary": "An incomplete handbook with no description available.",
+        "quality_flags": [
+          "missing_description",
+          "low_availability",
+          "low_rating"
+        ]
+      },
+      "actual": {
+        "category": "nonfiction",
+        "summary": "An incomplete handbook on various topics.",
+        "quality_flags": [
+          "empty_quality_issue"
+        ]
+      }
+    },
+    {
+      "case_id": "case_8_conservative_edge",
+      "passed": false,
+      "expected": {
+        "category": "other",
+        "summary": "An experimental text blending memoir, sci-fi fragments, and poetry.",
+        "quality_flags": [
+          "low_rating"
+        ]
+      },
+      "actual": {
+        "category": "poetry",
+        "summary": "An unusual experimental text blending memoir, sci-fi fragments, and poetry.",
+        "quality_flags": [
+          "low_rating",
+          "low_availability"
+        ]
+      }
+    }
+  ]
+}

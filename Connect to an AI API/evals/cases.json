@@ -1,0 +1,146 @@
+[
+  {
+    "case_id": "case_1_fiction",
+    "input": {
+      "title": "The Great Gatsby",
+      "product_url": "https://books.toscrape.com/catalogue/the-great-gatsby_101/index.html",
+      "price_gbp": 12.99,
+      "availability": 15,
+      "rating": 5,
+      "description": "A story of fabulously wealthy Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+      "source_page": "https://books.toscrape.com/catalogue/page-1.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "fiction",
+      "summary": "A classic novel exploring wealth, love, and the American Dream.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_2_nonfiction",
+    "input": {
+      "title": "Sapiens: A Brief History of Humankind",
+      "product_url": "https://books.toscrape.com/catalogue/sapiens_102/index.html",
+      "price_gbp": 24.50,
+      "availability": 8,
+      "rating": 4,
+      "description": "From a renowned historian comes a narrative history of humanity's creation and evolution.",
+      "source_page": "https://books.toscrape.com/catalogue/page-1.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "nonfiction",
+      "summary": "An exploration of the history and evolution of humankind.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_3_poetry",
+    "input": {
+      "title": "Selected Poems",
+      "product_url": "https://books.toscrape.com/catalogue/selected-poems_103/index.html",
+      "price_gbp": 9.99,
+      "availability": 12,
+      "rating": 4,
+      "description": "A timeless collection of lyrical poetry exploring nature, love, and loss.",
+      "source_page": "https://books.toscrape.com/catalogue/page-2.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "poetry",
+      "summary": "A collection of lyrical poems exploring nature, love, and loss.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_4_children",
+    "input": {
+      "title": "Where the Wild Things Are",
+      "product_url": "https://books.toscrape.com/catalogue/wild-things_104/index.html",
+      "price_gbp": 8.99,
+      "availability": 30,
+      "rating": 5,
+      "description": "A beloved children's picture book about a mischievous boy who sails to an island of monsters.",
+      "source_page": "https://books.toscrape.com/catalogue/page-2.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "children",
+      "summary": "A children's picture book about a boy visiting a land of monsters.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_5_mystery",
+    "input": {
+      "title": "The Hound of the Baskervilles",
+      "product_url": "https://books.toscrape.com/catalogue/hound-baskervilles_105/index.html",
+      "price_gbp": 11.20,
+      "availability": 10,
+      "rating": 4,
+      "description": "Sherlock Holmes investigates the legend of a supernatural hound on the Devon moors.",
+      "source_page": "https://books.toscrape.com/catalogue/page-3.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "mystery",
+      "summary": "Sherlock Holmes investigates a mysterious legend on the moors.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_6_other_ambiguous",
+    "input": {
+      "title": "Miscellaneous Proceedings 2024",
+      "product_url": "https://books.toscrape.com/catalogue/misc-proc_106/index.html",
+      "price_gbp": 45.00,
+      "availability": 2,
+      "rating": 3,
+      "description": "Compilation of annual meeting notes and administrative updates.",
+      "source_page": "https://books.toscrape.com/catalogue/page-3.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "other",
+      "summary": "A compilation of annual meeting notes and administrative updates.",
+      "quality_flags": []
+    }
+  },
+  {
+    "case_id": "case_7_quality_issues",
+    "input": {
+      "title": "Incomplete Handbook",
+      "product_url": "https://books.toscrape.com/catalogue/incomplete_107/index.html",
+      "price_gbp": 5.00,
+      "availability": 0,
+      "rating": 1,
+      "description": null,
+      "source_page": "https://books.toscrape.com/catalogue/page-3.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "nonfiction",
+      "summary": "An incomplete handbook with no description available.",
+      "quality_flags": ["missing_description", "low_availability", "low_rating"]
+    }
+  },
+  {
+    "case_id": "case_8_conservative_edge",
+    "input": {
+      "title": "Shadows in the Deep",
+      "product_url": "https://books.toscrape.com/catalogue/shadows-deep_108/index.html",
+      "price_gbp": 14.99,
+      "availability": 5,
+      "rating": 2,
+      "description": "An unusual experimental text blending memoir, sci-fi fragments, and poetry.",
+      "source_page": "https://books.toscrape.com/catalogue/page-3.html",
+      "fetched_at": "2026-08-19T11:58:56.741061+00:00"
+    },
+    "expected": {
+      "category": "other",
+      "summary": "An experimental text blending memoir, sci-fi fragments, and poetry.",
+      "quality_flags": ["low_rating"]
+    }
+  }
+]
